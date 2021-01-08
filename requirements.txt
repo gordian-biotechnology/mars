@@ -1,5 +1,5 @@
 absl-py==0.8.1
-anndata==0.6.22.post1
+anndata>=0.6.22.post1
 annoy==1.16.0
 appnope==0.1.0
 astor==0.8.0
@@ -63,7 +63,7 @@ numpy==1.17.0
 oauthlib==3.1.0
 opt-einsum==3.1.0
 packaging==19.2
-pandas==0.25.0
+pandas>=0.25.0
 pandocfilters==1.4.2
 parso==0.5.1
 patsy==0.5.1
@@ -108,7 +108,7 @@ termcolor==1.1.0
 terminado==0.8.2
 testpath==0.4.2
 tf-estimator-nightly==1.14.0.dev2019030115
-torch==1.2.0
+torch==1.4.0
 tornado==6.0.3
 tqdm==4.33.0
 traitlets==4.3.2
