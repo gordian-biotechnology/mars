@@ -348,18 +348,18 @@ class MARS:
             param.requires_grad = requires_grad
             
             
-    def name_cell_types(self, adata, landmk_all, cell_name_mappings, top_match=5, umap_reduce_dim=True, ndim=10):
+    def name_cell_types(self, adata, landmk_all, cell_name_mappings, exp_name='experiment',top_match=5, umap_reduce_dim=True, ndim=10):
         """For each test cluster, estimate sigma and mean. Fit Gaussian distribution with that mean and sigma
         and calculate the probability of each of the train landmarks to be the neighbor to the mean data point.
         Normalization is performed with regards to all other landmarks in train."""
         
-        experiments = list(OrderedDict.fromkeys(list(adata.obs['experiment'])))
+        experiments = list(OrderedDict.fromkeys(list(adata.obs[exp_name])))
         
         encoded_tr = []
         landmk_tr = []
         landmk_tr_labels = []
         for idx, exp in enumerate(experiments[:-1]):
-            tiss = adata[adata.obs['experiment'] == exp,:]
+            tiss = adata[adata.obs[exp_name] == exp,:]
             
             if exp==self.unlabeled_metadata: 
                 raise ValueError("Error: Unlabeled dataset needs to be last one in the input anndata object.")
@@ -368,7 +368,7 @@ class MARS:
             landmk_tr.append(landmk_all[idx])
             landmk_tr_labels.append(np.unique(tiss.obs['truth_labels']))
             
-        tiss = adata[adata.obs['experiment'] == self.unlabeled_metadata,:]
+        tiss = adata[adata.obs[exp_name] == self.unlabeled_metadata,:]
         ypred_test = tiss.obs['MARS_labels']
         uniq_ytest = np.unique(ypred_test)
         encoded_test = tiss.obsm['MARS_embedding']
